@@ -1,0 +1,77 @@
+﻿pydeequ class,PyDeequ Method,DQDL,Desc
+,,AggregateMatch,Checks if two datasets match by comparing summary metrics like total sales amount. Useful for financial institutions to compare if all data is ingested from source systems.
+,,ColumnCorrelation,Checks how well two columns are corelated.
+,,ColumnCount,Checks if any columns are dropped.
+,,ColumnDataType,Checks if a column is compliant with a datatype.
+,,ColumnExists,Checks if columns exist in a dataset. This allows customers building self service data platforms to ensure certain columns are made available.
+,,ColumnLength,Checks if length of data is consistent.
+,,ColumnNamesMatchPattern,Checks if column names match defined patterns. Useful for governance teams to enforce column name consistency.
+,,ColumnValues,Checks if data is consistent per defined values. This rule supports regular expressions.
+,,CustomSql,Customers can implement almost any type of data quality checks in SQL.
+,,DataFreshness,Checks if data is fresh.
+,,DatasetMatch,Compares two datasets and identifies if they are in synch.
+  ,,ReferentialIntegrity,Checks if two datasets have referential integrity.
+,,RowCountMatch,Checks if record counts between two datasets match.
+,,SchemaMatch,Checks if schema between two datasets match.
+pydeequ.checks,"hasCompleteness(column, assertion)",Completeness,Checks for any blank or NULLs in data.
+pydeequ.checks,"hasNumberOfDistinctValues(column, assertion, binningUdf, maxBins)",DistinctValuesCount,Checks for duplicate values.
+pydeequ.checks,"hasEntropy(column, assertion)",Entropy,Checks for entropy of the data.
+pydeequ.checks,isComplete(column),IsComplete,Checks if 100% of the data is complete.
+pydeequ.checks,"isPrimaryKey(column, *columns) Not Implemented |",IsPrimaryKey,Checks if a column is a primary key (not NULL and unique).
+pydeequ.checks,isUnique(column),IsUnique,Checks if 100% of the data is unique.
+pydeequ.checks,"hasMean(column, assertion)",Mean,Checks if the mean matches the set threshold.
+pydeequ.checks,"hasApproxCountDistinct(column, assertion)",RowCount,Checks if record counts match a threshold.
+pydeequ.checks,"hasStandardDeviation(column, assertion)",StandardDeviation,Checks if standard deviation matches the threshold.
+pydeequ.checks,"hasSum(column, assertion)",Sum,Checks if sum matches a set threshold.
+pydeequ.checks,"hasUniqueness(columns, assertion)",Uniqueness,Checks if uniqueness of dataset matches threshold.
+pydeequ.checks,"hasUniqueValueRatio(columns, assertion)",UniqueValueRatio,Checks if the unique value ration matches threshold.
+pydeequ.checks,hasSize(assertion),,Creates a constraint that calculates the data frame size and runs the assertion on it.
+pydeequ.checks,areComplete(columns),,Creates a constraint that asserts completion in combined set of columns.
+pydeequ.checks,"haveCompleteness(columns, assertion)",,Creates a constraint that asserts on completed rows in a combined set of columns.
+pydeequ.checks,areAnyComplete(columns),,Creates a constraint that asserts any completion in the combined set of columns.
+pydeequ.checks,"haveAnyCompleteness(columns, assertion)",,Creates a constraint that asserts on any completion in the combined set of columns.
+pydeequ.checks,"hasDistinctness(columns, assertion)",,Creates a constraint on the distinctness (ratio) in a single or combined set of key columns.
+pydeequ.checks,"hasHistogramValues(column, assertion, binningUdf, maxBins)",,Creates a constraint that asserts on column's value distribution.
+pydeequ.checks,"kllSketchSatisfies(column, assertion, kllParameters)",,Creates a constraint that asserts on column's sketch size.
+pydeequ.checks,"hasMutualInformation(columnA, columnB, assertion)",,Creates a constraint that asserts on a mutual information between two columns. Mutual Information describes how much information about one column can be inferred from another.
+pydeequ.checks,"hasApproxQuantile(column, quantile, assertion)",,Creates a constraint that asserts on an approximated quantile
+pydeequ.checks,"hasMinLength(column, assertion)",,Creates a constraint that asserts on the minimum length of a string datatype column.
+pydeequ.checks,"hasMaxLength(column, assertion)",,Creates a constraint that asserts on the maximum length of a string datatype column.
+pydeequ.checks,"hasMin(column, assertion)",,"Creates a constraint that asserts on the minimum of a column having long, int, or float datatype"
+pydeequ.checks,"hasMax(column, assertion)",,"Creates a constraint that asserts on the maximum of a column having long, int, or float datatype"
+pydeequ.checks,"hasSum(column, assertion)",,Creates a constraint that asserts on the sum of the column
+pydeequ.checks,"hasCorrelation(columnA, columnB, assertion)",,Creates a constraint that asserts on the pearson correlation between two columns.
+pydeequ.checks,"satisfies(columnCondition, constraintName, assertion)",,Creates a constraint that runs the given condition on the data frame.
+pydeequ.checks,"hasPattern(column, pattern, assertion, name)",,"Checks for pattern compliance. Given a column name and a regular expression, defines a Check on the average compliance of the column's values to the regular expression."
+pydeequ.checks,"containsCreditCardNumber(column, assertion)",,Check to run against the compliance of a column against standard pattern.
+pydeequ.checks,"containsEmail(column, assertion)",,Check to run against the compliance of a column against standard pattern.
+pydeequ.checks,"containsURL(column, assertion)",,Check to run against the compliance of a column against standard pattern.
+pydeequ.checks,"containsSocialSecurityNumber(column, assertion)",,Check to run against the compliance of a column against standard pattern.
+pydeequ.checks,"isNonNegative(column, assertion)",,Creates a constraint which asserts that a column contains no negative values.
+pydeequ.checks,"isPositive(column, assertion)",,Creates a constraint which asserts that a column contains no negative values and is greater than 0.
+pydeequ.checks,"isLessThan(columnA, columnB, assertion)",,"Asserts that, in each row, the value of columnA is less than the value of columnB"
+pydeequ.checks,"isLessThanOrEqualTo(columnA, columnB)",,"Asserts that, in each row, the value of columnA is less than or equal to the value of columnB."
+pydeequ.checks,"isGreaterThan(columnA, columnB, assertion)",,"Asserts that, in each row, the value of columnA is greater than the value of columnB"
+pydeequ.checks,"isGreaterThanOrEqualTo(columnA, columnB)",,"Asserts that, in each row, the value of columnA is greather than or equal to the value of columnB"
+pydeequ.checks,"isContainedIn(column, allowed_values)",,Asserts that every non-null value in a column is contained in a set of predefined values
+pydeequ.checks,evaluate(context),,Not Implemented
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,

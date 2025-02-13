@@ -1,0 +1,67 @@
+{
+    "Comment": "Run a set of Glue ETL jobs to Profile a Batch of Data Sources and Recommend Validation Rules",
+    "StartAt": "DQ_Profile_DataSources",
+    "States": {
+      "DQ_Profile_DataSources": {
+        "Type": "Task",
+        "Resource": "arn:aws-us-gov:states:::glue:startJobRun.sync",
+        "Parameters": {
+          "JobName": "dtl-prd-SMPL0-DQ_Profile_DataSources",
+          "Arguments": {
+            "--ProcessParms.$": "States.JsonToString($$.Execution.Input)"
+          }
+        },
+        "Next": "DQ_Suggestions"
+      },
+      "DQ_Suggestions": {
+        "Type": "Task",
+        "Resource": "arn:aws-us-gov:states:::glue:startJobRun.sync",
+        "Parameters": {
+          "JobName": "dtl-prd-SMPL0-DQ_Suggestions",
+          "Arguments": {
+            "--ProcessParms.$": "States.JsonToString($$.Execution.Input)"
+          }
+        },
+        "Next": "DQ_Recommend_Rulesets"
+      },
+      "DQ_Recommend_Rulesets": {
+        "Type": "Task",
+        "Resource": "arn:aws-us-gov:states:::glue:startJobRun.sync",
+        "Parameters": {
+          "JobName": "dtl-prd-SMPL0-DQ_Recommend_Rulesets",
+          "Arguments": {
+            "--ProcessParms.$": "States.JsonToString($$.Execution.Input)"
+          }
+        },
+        "Next": "Batch_Status_Check"
+      },
+      "Batch_Status_Check": {
+        "Type": "Task",
+        "Resource": "arn:aws-us-gov:states:::lambda:invoke",
+        "Parameters": {
+          "FunctionName": "arn:aws-us-gov:lambda:us-gov-west-1:{aws_acct}:function:{env_prefix}-Batch_Status_Check",
+          "Payload.$": "$$.Execution.Input"
+        },
+        "Next": "Batch_Notify",
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "CustomError"
+            ],
+            "IntervalSeconds": 1,
+            "MaxAttempts": 2,
+            "BackoffRate": 2
+          }
+        ]
+      },
+      "Batch_Notify": {
+        "Type": "Task",
+        "Resource": "arn:aws-us-gov:states:::lambda:invoke",
+        "Parameters": {
+          "FunctionName": "arn:aws-us-gov:lambda:us-gov-west-1:{aws_acct}:function:{env_prefix}-SMPL0-Batch_Notify",
+          "Payload.$": "$$.Execution.Input"
+        },
+        "End": true
+      }
+    }
+  }
